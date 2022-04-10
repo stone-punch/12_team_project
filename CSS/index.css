@@ -20,6 +20,10 @@
     content: '';
     clear: both;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
 img{
     max-width: 100%;
     height: auto;
@@ -98,7 +102,18 @@ html{
     margin: 0 auto;
     background: #9FE2BF;
 }
+#main-content .map-container .map-search-btn{
+    display: block;
+    width: 25%;
 
+    margin: 2rem auto;
+    padding: 0.5em;
+    border: 0;
+    border-radius: 30px;
+    color: white;
+    text-align: center;
+    background: #1cb1c9;
+}
 
 
 #sub-content{
