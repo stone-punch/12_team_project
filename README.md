@@ -1,7 +1,7 @@
 # 12_team_capstone
 
 ## Petper Web 프로그램 // App 프로그램
-## https://stone-punch.github.io/12_team_project/
+## https://stone-punch.github.io/12_team_project/login
 
 ###역활분담
 ```
