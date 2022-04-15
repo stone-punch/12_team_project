@@ -54,22 +54,23 @@ div{
     font-weight: 700;
 }
 
-.nicname input{
+.id input{
     width: 100%;
 }
-.id input{
+.email input{
     width: 100%;
 }
 .password input {
     width: 100%;
 }
 
-.passwordCheck input {
-    width: 100%;
-}
-
 
 .signUp button {
+    width: 100%;
+    cursor:pointer;
+}
+
+.gotoLogin button {
     width: 100%;
     cursor:pointer;
 }
