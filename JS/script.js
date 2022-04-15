@@ -1,7 +1,7 @@
 $(document).ready(function(){  //jquery 시작
 
-    //네이게이션 메뉴
-    $("#main-nav .main-menu>li").hover(function(){
+    //네비게이션 메뉴
+    $("#main-nav ul.main-menu>li").hover(function(){
         $("ul.sub-menu").stop().slideDown();
     },function (){
         $("ul.sub-menu").stop().slideUp();
