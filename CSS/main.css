@@ -41,11 +41,12 @@ html {
 }
 
 #main-header {
-    top: 0;
-    left: 0;
+
     width: 100%;
     height: 80px;
     background: #DFFF00;
+    position: relative;
+    z-index: 10;
 }
 
 #main-header .grid {
@@ -82,40 +83,52 @@ float: left;
 
     background: green;
 }
-#main-nav .grid{
+
+#main-nav .main-menu{
     width: 100%;
     height: 100%;
-
-    margin: 0 40px;
-}
-#main-nav ul {
-    width: 100%;
-    height: 100%;
-
-
-}
-
-#main-nav ul li:nth-child(2n-1):hover {
-    background: #6495ED;
-}
-
-#main-nav ul li:nth-child(2n-1) {
-    width: 20%;
-    height: 52px;
-    line-height: 52px;
     text-align: center;
-    margin: 0 10px;
-    float: left;
-}
+    font-size: 18px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
 
-#main-nav ul li {
-    height: 30px;
-    line-height: 30px;
-    margin: 10px 0;
-    float: left;
 }
+#main-nav .main-menu>li{
+    width: 25%;
+    height: 100%;
+    float: left;
+    position: relative;
 
-#main-nav ul li a {
+}
+#main-nav .main-menu>li:hover>a{
+    background: #1BBC9B;
+}
+#main-nav .main-menu>li>a{
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 45px;
+}
+#main-nav .main-menu>li>.sub-menu{
+    display: none;
+    width: 100%;
+    height: 80px;
+    line-height: 40px;
+
+
+    background: #ffffff;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+#main-nav .main-menu>li>.sub-menu>li{
+    width: 100%;
+    height: 40px;
+}
+#main-nav .main-menu>li>.sub-menu>li:hover>a{
+    background: #9FE2BF;
+}
+#main-nav .main-menu>li>.sub-menu>li>a{
     display: block;
     width: 100%;
     height: 100%;
@@ -135,11 +148,13 @@ float: left;
     height: 70%;
     margin: 2em 0;
     background: #FF7F50;
+
 }
 
 #main-content .map-container .map-header {
     margin-bottom: 2rem;
     text-align: center;
+
 }
 
 #main-content .map-container .map-header .main-txt {
