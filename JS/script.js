@@ -1,3 +1,29 @@
+$(document).ready(function(){  //jquery 시작
+
+    //네이게이션 메뉴
+    $("#main-nav .main-menu>li").hover(function(){
+        $("ul.sub-menu").stop().slideDown();
+    },function (){
+        $("ul.sub-menu").stop().slideUp();
+    });
+
+
+
+
+});  //jquery 끝
+
+
+
+
+
+
+
+
+
+
+
+
+//메인 지도 부분
 let x_ln = 33.476343;
 let y_ln = 126.534805;
 
@@ -74,3 +100,4 @@ for (let i = 0; i < 13; i++) {
         var map = new kakao.maps.Map(mapContainer, mapOption);
     });
 }
+//메인 지도 부분
