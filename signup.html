@@ -4,33 +4,96 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <link rel="stylesheet" type="text/css" href="./CSS/signup.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+        
+        const firebaseConfig = {
+          apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg",
+          authDomain: "petper-14f9d.firebaseapp.com",
+          databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
+          projectId: "petper-14f9d",
+          storageBucket: "petper-14f9d.appspot.com",
+          messagingSenderId: "382691123578",
+          appId: "1:382691123578:web:975408487ddb2e5fde76c3",
+          measurementId: "G-71HYZ44KRJ"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        import { getDatabase, ref, set, child, get, update, remove } 
+
+            from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+
+        const db = getDatabase();
+
+        const id = document.getElementById('id');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const submit = document.getElementById('signUpButton');
+        const gotologin = document.getElementById('gotoLoginButton');
+
+
+        function RegisterUser(){
+            const dbref = ref(db);
+
+            get(child(dbref, "UsersList/"+ id.value)).then((snapshot)=>{
+                if(snapshot.exists()){
+                    alert("이미 있는 계정입니다.");
+                }
+
+                else{
+                    set(ref(db, "UsersList/"+ id.value), {
+                        id: id.value,
+                        email: email.value,
+                        password: encPass()
+                    })
+                    .then(()=>{
+                        alert("성공적으로 가입되었습니다.");
+                    })
+                    .catch((error)=>{
+                        alert("error"+error);
+                    })
+                }
+            });
+        }
+
+        function encPass(){
+            var pass12 = CryptoJS.AES.encrypt(password.value, password.value);
+            return pass12.toString();
+        }
+
+        submit.addEventListener('click', RegisterUser);
+
+    </script>
 <div class="wrap">
     <div class="title"><h1>회원가입</h1></div>
 
-
-    <div class="nicname">
-        <input id="name"  type="text" placeholder="닉네임을 입력해 주세요.">
-    </div>
-
     <div class="id">
         <input id="id" type="text" placeholder="아이디를 입력해 주세요.">
+    </div>
+
+    <div class="email">
+        <input id="email" type="text" placeholder="이메일을 입력해 주세요.">
     </div>
 
     <div class="password">
         <input id="password" type="password" placeholder="비밀번호를 입력해 주세요.">
     </div>
 
-    <div class="passwordCheck">
-        <input id="passwordCheck" type="password" placeholder="비밀번호를 다시 입력해 주세요.">
-
-    </div>
     <div class="line">
         <hr>
     </div>
+    
     <div class="signUp">
         <button id="signUpButton">가입하기</button>
+    </div>
+
+    <div class="gotoLogin">
+        <button id="gotoLoginButton" onclick="location.href='login.html'">로그인 페이지로</button>
     </div>
 
 
