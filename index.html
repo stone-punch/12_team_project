@@ -11,7 +11,7 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="./JS/script.js"></script>
     <link rel="stylesheet" href="./CSS/CSS_reset.css">
-    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/index.css">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
         <header id="main-header">
             <div class="grid clearfix">
                 <a class="logo" href="#">
-                    <img src="./Images/logo.png" alt="PETOPIA">
+                    <img src="./images/logo.png" alt="PETOPIA">
                 </a>
                 <div class="person clearfix">
                     <p id="welcomeuser">님 환영합니다.</p>
@@ -34,31 +34,31 @@
         <!-- main-nav -->
         <nav id="main-nav">
 
-                <ul class="main-menu clearfix">
-                    <li><a href="#">서비스 소개</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">CONCEPT</a></li>
-                            <li><a href="#">이용방법</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">커뮤니티</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">공지사항</a></li>
-                            <li><a href="#">게시판</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">백과사전</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">품종</a></li>
-                            <li><a href="#">훈련방법</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">품종식별</a>
-                        <ul class="sub-menu">
+            <ul class="main-menu clearfix">
+                <li><a href="#">서비스 소개</a>
+                    <ul class="sub-menu">
+                        <li><a href="#">CONCEPT</a></li>
+                        <li><a href="#">이용방법</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">커뮤니티</a>
+                    <ul class="sub-menu">
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">게시판</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">백과사전</a>
+                    <ul class="sub-menu">
+                        <li><a href="#">품종</a></li>
+                        <li><a href="#">훈련방법</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">품종식별</a>
+                    <ul class="sub-menu">
 
-                        </ul>
-                    </li>
-                </ul>
+                    </ul>
+                </li>
+            </ul>
 
         </nav>
         <!-- //main-nav -->
@@ -140,23 +140,22 @@
         const logout = document.getElementById('logoutBtn');
         var currentUser = null;
 
-        function getUsername(){
+        function getUsername() {
             currentUser = JSON.parse(sessionStorage.getItem('user'));
         }
 
-        function Signout(){
+        function Signout() {
             sessionStorage.removeItem('user');
             window.location = "login.html";
         }
 
-        window.onload = function(){
+        window.onload = function() {
             getUsername();
-            if(currentUser == null){
+            if (currentUser == null) {
                 window.location('login.html');
-            }
-            else{
+            } else {
                 const welcomeuser = document.getElementById('welcomeuser');
-                welcomeuser.innerHTML = "<p id='welcomeuser'>"+currentUser.id+"님 환영합니다.</p>"
+                welcomeuser.innerHTML = "<p id='welcomeuser'>" + currentUser.id + "님 환영합니다.</p>"
             }
         }
 
