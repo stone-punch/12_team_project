@@ -9,6 +9,10 @@
     --color8: #CCCCFF;
 }
 
+ul {
+    list-style: none;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -21,30 +25,25 @@
     clear: both;
 }
 
-body{
+body {
     margin: 0;
     background-color: #1BBC9B;
 }
 
-#main-screen{
-
+#main-screen {
     width: 100%;
-
     margin: 0 auto;
-
 }
-#main-screen .grid{
+
+#main-screen .grid {
     display: flex;
     align-items: center;
- justify-content: center;
-
-width: 100%;
+    justify-content: center;
+    width: 100%;
     height: 500px;
-
 }
 
-#login-form{
-
+#login-form {
     width: 300px;
     background-color: #eeeff1;
     margin-left: auto;
@@ -54,16 +53,16 @@ width: 100%;
     padding: 20px;
 }
 
-#login-form .text-field{
+#login-form .text-field {
     font-size: 14px;
     width: 100%;
     border: none;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-
 }
-#login-form .submit-btn{
+
+#login-form .submit-btn {
     font-size: 14px;
     background-color: #1BBC9B;
     color: white;
@@ -73,22 +72,20 @@ width: 100%;
     border: none;
     cursor: pointer;
 }
-#login-form .links{
+
+#login-form .links {
     margin: 20px 10px 0px 0px;
     text-align: center;
 }
-#login-form .links a{
+
+#login-form .links a {
     font-size: 12px;
     color: #9b9b9b;
 }
 
-
-
-
-.main-link{
+.main-link {
     width: 80px;
     height: 20px;
-
     text-align: center;
     margin: 0 auto;
     margin-top: 30px;
