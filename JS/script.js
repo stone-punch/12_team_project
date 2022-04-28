@@ -1,26 +1,22 @@
-$(document).ready(function(){  //jquery 시작
-
-    //네비게이션 메뉴
-    $("#main-nav ul.main-menu>li").hover(function(){
-        $("ul.sub-menu").stop().slideDown();
-    },function (){
-        $("ul.sub-menu").stop().slideUp();
-    });
+// documaent = html 그 자체 
+const searchEl = document.querySelector('.search');
+const searchInputEl = searchEl.querySelector('input');
 
 
+searchEl.addEventListener('click', function() {
+    searchInputEl.focus();
+});
 
+searchInputEl.addEventListener('focus', function() {
 
-});  //jquery 끝
+    searchEl.classList.add('focused');
+    searchInputEl.setAttribute('placeholder', '통합검색');
+});
+searchInputEl.addEventListener('blur', function() {
 
-
-
-
-
-
-
-
-
-
+    searchEl.classList.remove('focused');
+    searchInputEl.setAttribute('placeholder', '');
+});
 
 
 //메인 지도 부분
