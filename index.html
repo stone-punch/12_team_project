@@ -327,18 +327,19 @@
 
         function Signout() {
             localStorage.removeItem('user');
-            window.location = "../login/index.html";
+            window.location = "/login/index.html";
         }
 
         window.onload = function() {
             getUsername();
             if (currentUser == null) {
-                window.location('../login/index.html');
+                window.location('/login/index.html');
             } else {
                 const welcomeuser = document.getElementById('welcomeuser');
                 welcomeuser.innerHTML = "<p id='welcomeuser'>" + currentUser.id + "님 환영합니다.</p>"
             }
         }
+        logout.addEventListener('click', Signout);
     </script>
 </body>
 
