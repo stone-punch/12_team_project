@@ -23,6 +23,19 @@ searchInputEl.addEventListener('blur', function() {
 let x_ln = 33.476343;
 let y_ln = 126.534805;
 
+
+/*https://github.com/fridaygmman/information-blog/blob/master/_posts/2020-01-26-hosinfo.html
+    여기 참고해서 인포윈도우 설계할 것
+
+*/
+
+
+
+
+
+
+
+
 var $area = document.querySelectorAll('.area > path');
 for (let i = 0; i < 13; i++) {
     $area[i].addEventListener('click', function() {
@@ -31,10 +44,40 @@ for (let i = 0; i < 13; i++) {
             case 0:
                 x_ln = 33.476343;
                 y_ln = 126.534805;
+                var positions = [{
+                        content: 'test 1',
+                        lating: new kakao.maps.LatLng(33.476095, 126.537977)
+                    },
+                    {
+                        content: 'test 2',
+                        lating: new kakao.maps.LatLng(33.477035, 126.540450)
+                    },
+                    {
+                        content: 'test 3',
+                        lating: new kakao.maps.LatLng(33.472789, 126.539465)
+                    },
+                    {
+                        content: 'test 4',
+                        lating: new kakao.maps.LatLng(33.474854, 126.533909)
+                    }
+                ];
                 break;
             case 1:
                 x_ln = 33.485557;
                 y_ln = 126.681193;
+                var positions = [{
+                        lating: new kakao.maps.LatLng(33.490017, 126.676519)
+                    },
+                    {
+                        lating: new kakao.maps.LatLng(33.489049, 126.677565)
+                    },
+                    {
+                        lating: new kakao.maps.LatLng(33.487602, 126.680346)
+                    },
+                    {
+                        lating: new kakao.maps.LatLng(33.485846, 126.678267)
+                    }
+                ];
                 break;
             case 2:
                 x_ln = 33.503121;
@@ -94,6 +137,61 @@ for (let i = 0; i < 13; i++) {
 
         // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        for (var j = 0; j < positions.length; j++) {
+            var marker = new kakao.maps.Marker({
+                map: map, // 마커를 표시할 지도
+                position: positions[j].lating, // 마커를 표시할 위치
+
+            });
+            var overlay = new kakao.maps.CustomOverlay({
+                content: '<div class="board">' +
+                    '<div class="name">' + positions[j].content +
+                    '    <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+                    '</div>' +
+                    '    <div class="info">test_info</div>' +
+                    '</div>',
+                map: map,
+                position: marker.getPosition()
+            });
+            kakao.maps.event.addListener(marker, 'click', function() {
+                overlay.setMap(map);
+            });
+            var close_btn = document.createElement('button');
+            close_btn.onclick = function() {
+                overlay.setMap(null);
+            };
+
+
+        }
+
+        /*
+                        var content =
+                                    '<div class="board">' +
+                                    '    <div class="name">' + positions[j].content + '</div>' + 
+                                    '<div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+                                    '    </div>' +
+                                    '    <div class="info"></div>' +
+                                    '</div>';
+
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                        });
+
+*/
+
+        var close_btn = document.createElement('button');
+        close_btn.onclick = function() {
+            overlay.setMap(null);
+        };
+
+        // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+        function closeOverlay() {
+            overlay.setMap(null);
+        }
+
     });
 }
 //메인 지도 부분
