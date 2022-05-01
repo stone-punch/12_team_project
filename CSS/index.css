@@ -269,13 +269,16 @@ header .main-menu .item .item__contants .contants__texture p {
     background: #CCCCFF;
 }
 
+/* map-container플렉스 레이아웃으로 변경 */
 #main-content .map-container {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 70%;
     height: 70%;
     margin: 2em 0;
-    background: #FF7F50;
+    background: #327aff;
 }
+
 
 #main-content .map-container .map-header {
     margin-bottom: 2rem;
@@ -298,12 +301,23 @@ header .main-menu .item .item__contants .contants__texture p {
     font-size: 1rem;
 }
 
-#main-content .map-container .map {
-    width: 70%;
-    height: 100%;
+#main-content .map-container .map_img {
+    width: 40%;
+    height: 20%;
     margin: 0 auto;
-    background: #9FE2BF;
+    
 }
+#main-content .map-container #map{
+    margin-top: 12%;
+    margin-left: 15%;
+
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    width:70%;
+    height: 50%;
+}
+
 
 
 /* map */
