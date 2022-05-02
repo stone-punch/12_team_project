@@ -22,27 +22,28 @@
         </div>
         <div class="board-view-wrap">
             <div class="board-view">
-                <div id="title" class="title"></div>
+                <div class="title">글 제목 들어갑니다</div>
                 <div class="info">
                     <dl>
                         <dt>번호</dt>
-                        <dd id="num"></dd>
+                        <dd>1</dd>
                     </dl>
                     <dl>
                         <dt>글쓴이</dt>
-                        <dd id="userid"></dd>
+                        <dd>홍길동</dd>
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd id="date"></dd>
+                        <dd>2020-10-29</dd>
                     </dl>
                     <dl>
                         <dt>조회</dt>
-                        <dd id="count">0</dd>
+                        <dd>33</dd>
                     </dl>
                 </div>
-                <div id="content" class="contents">
-                    <p></p><br/>
+                <div class="contents">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad doloribus quisquam nesciunt perferendis reprehenderit libero modi praesentium veniam consectetur voluptatum aliquam iure maiores, quod molestias quia vel sed minus explicabo!</p><br
+                    />
 
                 </div>
             </div>
@@ -54,57 +55,6 @@
             </div>
         </div>
     </div>
-
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"; 
-        const firebaseConfig = { 
-            apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg", 
-            authDomain: "petper-14f9d.firebaseapp.com", 
-            databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
-            projectId: "petper-14f9d", 
-            storageBucket: "petper-14f9d.appspot.com",
-            messagingSenderId: "382691123578", 
-            appId: "1:382691123578:web:975408487ddb2e5fde76c3", 
-            measurementId: "G-71HYZ44KRJ" 
-        }; // Initialize Firebase 
-        const app = initializeApp(firebaseConfig);
-    
-        import { getDatabase, ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js"; 
-        const db = getDatabase();
-        const receivedBoardId = location.search;
-        const params = new URLSearchParams(receivedBoardId);
-        const num = params.get('num');
-        const boardid = document.getElementById('num');
-        const userid = document.getElementById('userid');
-        const count = document.getElementById('count');
-        const date = document.getElementById('date');
-        const content = document.getElementById('content');
-        const title = document.getElementById('title');
-        
-        const dbref = ref(db);
-
-        function getBoardDB(){
-            get(child(dbref, "BoardList/FreeBoard/"+num)).then((snapshot)=>{
-                if(snapshot.exists()){
-                    boardid.innerText = snapshot.val().boardid;
-                    userid.innerText = snapshot.val().userid;
-                    date.innerText = snapshot.val().date;
-                    content.innerText = snapshot.val().content;
-                    title.innerText = snapshot.val().title;
-                    //count.innerText = snapshot.val().count;
-                }
-            })
-            .catch((error)=>{
-                console.log(error); 
-            })
-        }
-
-        window.onload = function(){
-            getBoardDB();
-        }
-    
-    </script>
 
 </body>
 

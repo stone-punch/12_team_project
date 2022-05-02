@@ -26,90 +26,42 @@
                 <div class="title">
                     <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" id="title" placeholder="제목입력"></dd>
+                        <dd><input type="text" placeholder="제목입력"></dd>
                     </dl>
                 </div>
-                
-                <div class="contents">
-                    <textarea id="content" placeholder="내용 입력"></textarea>
+                <div class="info">
+                    <dl>
+                        <dt>글쓴이</dt>
+                        <dd><input type="text" placeholder="글쓴이 입력"></dd>
+                    </dl>
+                    <dl>
+                        <dt>비밀번호</dt>
+                        <dd><input type="password" placeholder="비밀번호 입력"></dd>
+                    </dl>
                 </div>
+                <div class="contents">
+                    <textarea placeholder="내용 입력"></textarea>
+                </div>
+
+
+
+
+
 
             </div>
 
             <div class="btn">
-                <button id="submitBtn">등록</button>
-                <!-- <a href="#" onclick="WriteBoard()" class="on">등록</a> -->
+                <a href="./view.html" class="on">등록</a>
                 <a href="./index.html">취소</a>
 
             </div>
         </div>
     </div>
 
-<script type="module">
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"; 
-    const firebaseConfig = { 
-        apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg", 
-        authDomain: "petper-14f9d.firebaseapp.com", 
-        databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
-        projectId: "petper-14f9d", 
-        storageBucket: "petper-14f9d.appspot.com",
-        messagingSenderId: "382691123578", 
-        appId: "1:382691123578:web:975408487ddb2e5fde76c3", 
-        measurementId: "G-71HYZ44KRJ" 
-    }; // Initialize Firebase 
-    const app = initializeApp(firebaseConfig);
 
-    import { getDatabase, ref, child, get, update } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js"; 
-    const db = getDatabase();
-    const title = document.getElementById('title');
-    const content = document.getElementById('content');
-    const submit = document.getElementById('submitBtn');
 
-    var currentUser = null;
 
-    function WriteBoard(getUsername){ 
-        const dbref = ref(db);
-        let maxid;
-
-        get(child(dbref, "BoardList/FreeBoard/")).then((snapshot)=>{ 
-            maxid = snapshot.val().maxid;
-            let date = new Date();
-
-            update(ref(db, "BoardList/FreeBoard/"),
-            {
-                [maxid]: {
-                    date: date.toLocaleString(), //년월일시간 가져오는 함수
-                    userid: getUsername, //localstorage
-                    title: title.value, 
-                    content: content.value,
-                    boardid: maxid
-                },
-                maxid: maxid+1
-                
-            })
-            .then(()=>{
-                alert("게시글이 작성되었습니다.");
-                window.location="./index.html";
-            }) 
-            .catch((error)=>{ 
-                alert("error"+error); 
-            }) 
-            
-        });
-
-    } 
-
-    function getUsername() {
-        currentUser = JSON.parse(localStorage.getItem('user'));
-        return currentUser.id;
-    }
-
-    submit.addEventListener('click', function(){
-        WriteBoard(getUsername());
-    });
-
-</script>
 
 </body>
 

@@ -55,20 +55,14 @@ a {
 }
 
 .board-list .num,
-.board-list .writer {
+.board-list .writer,
+.board-list .date,
+.board-list .count {
     width: 10%;
 }
 
-.board-list .count {
-    width: 5%;
-}
-
-.board-list .date {
-    width: 20%;
-}
-
 .board-list .title {
-    width: 55%;
+    width: 60%;
     text-align: left;
 }
 
