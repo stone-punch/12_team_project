@@ -2,19 +2,15 @@ let x_ln = 33.476343;
 let y_ln = 126.534805;
 
 
+var $area = document.querySelectorAll('.area > path');
+
+
 /*https://github.com/fridaygmman/information-blog/blob/master/_posts/2020-01-26-hosinfo.html
     여기 참고해서 인포윈도우 설계할 것
 
 */
 
 
-
-
-
-
-
-
-var $area = document.querySelectorAll('.area > path');
 for (let i = 0; i < 13; i++) {
     $area[i].addEventListener('click', function() {
         console.log('area' + i);
@@ -120,8 +116,8 @@ for (let i = 0; i < 13; i++) {
             var marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
                 position: positions[j].lating, // 마커를 표시할 위치
-
             });
+            /*
             var overlay = new kakao.maps.CustomOverlay({
                 content: '<div class="board">' +
                     '<div class="name">' + positions[j].content +
@@ -139,36 +135,55 @@ for (let i = 0; i < 13; i++) {
             close_btn.onclick = function() {
                 overlay.setMap(null);
             };
+            */
 
+            /* 지도 출력시에 div크기 자동 변경*/
+            var mapContainer = document.querySelector('.map-container');
+            //mapContainer.style.width = '700px';
+            mapContainer.style.height = '1000px'; 
+            map.relayout();
+           
+            var CustomOverlay = new kakao.maps.CustomOverlay({
+                position: marker.getPosition()
+            });
 
+            var Customcontent = document.createElement('div');
+			Customcontent.className = "board";
+
+            var content_name = document.createElement("div");
+            content_name.className = "name";
+            content_name.appendChild(document.createTextNode(positions[j].content));
+            Customcontent.appendChild(content_name);
+
+            var close_btn = document.createElement("div");
+			close_btn.className = "close";
+			close_btn.setAttribute("name","닫기");
+			content_name.appendChild(close_btn);
+
+            var info = document.createElement("div");
+            info.className = "info";
+            info.appendChild(document.createTextNode(positions[j].content));
+            Customcontent.appendChild(info);
+
+            CustomOverlay.setContent(Customcontent);
+
+            (function(marker, CustomOverlay) {
+                close_btn.onclick = function() { CustomOverlay.setMap(null); };
+            // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    CustomOverlay.setMap(map);
+                    
+            });
+            })(marker, CustomOverlay);
+           
+            //CustomOverlay.setMap(null);
+            
         }
-
-        /*
-                        var content =
-                                    '<div class="board">' +
-                                    '    <div class="name">' + positions[j].content + '</div>' + 
-                                    '<div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-                                    '    </div>' +
-                                    '    <div class="info"></div>' +
-                                    '</div>';
-
-                        var overlay = new kakao.maps.CustomOverlay({
-                            content: content,
-                            map: map,
-                            position: marker.getPosition()
-                        });
-
-*/
 
         var close_btn = document.createElement('button');
         close_btn.onclick = function() {
             overlay.setMap(null);
         };
-
-        // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-        function closeOverlay() {
-            overlay.setMap(null);
-        }
 
     });
 }
