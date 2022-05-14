@@ -73,12 +73,13 @@
 
     function getFreeBoardList(page){   
         const dbref = ref(db);
-        let titlearray;
-
+        //let titlearray;
+        
         get(child(dbref, "BoardList/FreeBoard")).then((snapshot)=>{
             if(snapshot.exists()){
 
-                titlearray = Object.keys(snapshot.val());
+                // titlearray = snapshot.val();
+                // console.log(titlearray);
 
                 for(let i=page; i<page+11; i++){
                     const form = document.createElement("div")
@@ -86,6 +87,7 @@
                     form.innerHTML = `<div class="num">`+snapshot.val()[i].boardid+`</div><div class="title"><a href="./view.html?num=${snapshot.val()[i].boardid}">`+snapshot.val()[i].title+`</a></div><div class="writer">`+snapshot.val()[i].userid+`</div><div class="date">`+snapshot.val()[i].date+`</div><div class="count">0</div>`
                     FreeBoardList.appendChild(form);
                 }
+
 
             }
         })
