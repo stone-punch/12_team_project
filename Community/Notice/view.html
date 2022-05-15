@@ -47,6 +47,50 @@
                 </div>
             </div>
 
+            
+            <div class="comment-box">
+                <font size="3">
+                    <ul id="cmtlist" class="comment-list">
+                        
+                        <!-- <li> 
+                            <div style="border:1px solid black;" class="replybox">
+                                <ul class="reply-list">
+                                    <li class="create-reply">
+                                        <div class="write-reply">
+                                            <textarea></textarea>
+                                        </div>
+                                        <button id="replybtn">등록</button>
+                                    </li>
+                                    <li class="reply-content">
+                                        <div class="useridbox" style="float:left; margin-right: 33px;">
+                                            <span>test12345</span>
+                                        </div>
+                                        <div class="reply-txtbox">
+                                            <p>ㄴreply1</p>
+                                        </div>
+                                    </li>
+                                    <li class="reply-content">
+                                        <div class="useridbox" style="float:left; margin-right: 33px;">
+                                            <span>test12345</span>
+                                        </div>
+                                        <div class="reply-txtbox">
+                                            <p>ㄴreply2</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li> -->
+                        
+                    </ul>
+                </font>
+            </div>
+            <div>
+                <div class="write-comment">
+                    <textarea id="comment-box"></textarea>
+                </div>
+                <button id="commentbtn">등록</button>
+            </div>
+
             <div class="btn">
                 <a href="./index.html" class="on">목록</a>
                 <a href="./edit.html">수정</a>
@@ -55,6 +99,15 @@
         </div>
     </div>
 
+
+    <script>
+        function replybox(i){
+            console.log(i.parentNode.parentNode);
+            let replybox = document.createElement("li");
+            replybox.innerHTML = `<div class="write-reply"><textarea></textarea></div><button id="replybtn">등록</button>`;
+            i.parentNode.parentNode.after(replybox);
+        }
+    </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"; 
@@ -81,28 +134,124 @@
         const date = document.getElementById('date');
         const content = document.getElementById('content');
         const title = document.getElementById('title');
+        const cmtlist = document.getElementById('cmtlist');
         
         const dbref = ref(db);
 
+        const commentbtn= document.getElementById("commentbtn");
+
+        var currentUser = null;
+
+        function setCommentDB(getUsername){
+            var commentBoxValue= document.getElementById("comment-box").value;
+
+            get(child(dbref, "BoardList/Comment")).then((snapshot)=>{ 
+                let commentmaxid = snapshot.val().maxid;
+                let date = new Date();
+
+                update(ref(db, "BoardList/Comment"),
+                {
+                    [commentmaxid]: {
+                        date: date.toLocaleString(), //년월일시간 가져오는 함수
+                        userid: getUsername, //localstorage
+                        comment: commentBoxValue, 
+                        commentid: commentmaxid,
+                        boardid: num
+                    },
+                    maxid: commentmaxid+1
+                    
+                })
+                .then(()=>{
+                }) 
+                .catch((error)=>{ 
+                    alert("error"+error); 
+                }) 
+
+                get(child(dbref, "BoardList/FreeBoard/"+num+"/CommentList")).then((snapshot)=>{ 
+                    let maxid = snapshot.val().maxid;
+                    
+                    update(ref(db, "BoardList/FreeBoard/"+num+"/CommentList"),
+                    {
+                        
+                        ["comment"+maxid]: commentmaxid,
+                        maxid:maxid+1
+                    })
+                    .then(()=>{
+                        
+                        getBoardDB();
+                    }) 
+                    .catch((error)=>{ 
+                        alert("error"+error); 
+                    }) 
+                    
+                });
+                
+            }).then(()=>{
+                
+            });
+
+        }
+
+        function getUsername() {
+            currentUser = JSON.parse(localStorage.getItem('user'));
+            return currentUser.id;
+        }
+        
+        
+
         function getBoardDB(){
-            get(child(dbref, "BoardList/FreeBoard/"+num)).then((snapshot)=>{
-                if(snapshot.exists()){
-                    boardid.innerText = snapshot.val().boardid;
-                    userid.innerText = snapshot.val().userid;
-                    date.innerText = snapshot.val().date;
-                    content.innerText = snapshot.val().content;
-                    title.innerText = snapshot.val().title;
+            get(child(dbref, "BoardList/FreeBoard/"+num)).then((freeboardsnapshot)=>{
+                if(freeboardsnapshot.exists()){
+                    boardid.innerText = freeboardsnapshot.val().boardid;
+                    userid.innerText = freeboardsnapshot.val().userid;
+                    date.innerText = freeboardsnapshot.val().date;
+                    content.innerText = freeboardsnapshot.val().content;
+                    title.innerText = freeboardsnapshot.val().title;
                     //count.innerText = snapshot.val().count;
+
+                    get(child(dbref, "BoardList/Comment/")).then((cmtsnapshot)=>{
+                        if(cmtsnapshot.exists()){
+
+                            while(cmtlist.hasChildNodes()) {
+                                cmtlist.removeChild(cmtlist.childNodes[0])
+                            }
+
+                            for(let i=1; i<Object.keys(freeboardsnapshot.val().CommentList).length;i++){
+                                let cmtidlist = freeboardsnapshot.val().CommentList[`comment${i}`]
+                                const form = document.createElement("li");
+                                form.innerHTML = `<li class="comment">
+                                    <div class="useridbox" style="float:left; margin-right: 33px;">
+                                    <span>${cmtsnapshot.val()[cmtidlist].userid}</span>
+                                    </div>
+                                    <div class="cmt-txtbox">
+                                        <a onclick="replybox(this)">${cmtsnapshot.val()[cmtidlist].comment}</a>
+                                    </div>
+                                </li>`
+                                cmtlist.appendChild(form);
+                            }
+                            
+                        }
+                    }).then(()=>{
+
+                    })
+                    .catch((error)=>{
+                        console.log(error); 
+                    })
                 }
             })
             .catch((error)=>{
                 console.log(error); 
             })
+
         }
 
-        window.onload = function(){
-            getBoardDB();
-        }
+
+        commentbtn.addEventListener('click', function(){
+            setCommentDB(getUsername());
+        });
+
+        getBoardDB();
+        
     
     </script>
 
