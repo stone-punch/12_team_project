@@ -2,115 +2,97 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항</title>
 
 
-    <link rel="stylesheet" href="./css/css.css">
+  <link rel="stylesheet" href="./css/css.css">
 
 
 </head>
 
 <body>
 
-    <div class="board-wrap">
-        <div class="board-title">
-            <strong><a href="./index.html">공지사항</a></strong>
-            <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+  <div class="board-wrap">
+    <div class="board-title">
+      <strong><a href="./index.html">공지사항</a></strong>
+      <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+    </div>
+    <div class="board-view-wrap">
+      <div class="board-view">
+        <div id="title" class="title"></div>
+        <div class="info">
+          <dl>
+            <dt>번호</dt>
+            <dd id="num"></dd>
+          </dl>
+          <dl>
+            <dt>글쓴이</dt>
+            <dd id="userid"></dd>
+          </dl>
+          <dl>
+            <dt>작성일</dt>
+            <dd id="date"></dd>
+          </dl>
+          <dl>
+            <dt>조회</dt>
+            <dd id="count">0</dd>
+          </dl>
         </div>
-        <div class="board-view-wrap">
-            <div class="board-view">
-                <div id="title" class="title"></div>
-                <div class="info">
-                    <dl>
-                        <dt>번호</dt>
-                        <dd id="num"></dd>
-                    </dl>
-                    <dl>
-                        <dt>글쓴이</dt>
-                        <dd id="userid"></dd>
-                    </dl>
-                    <dl>
-                        <dt>작성일</dt>
-                        <dd id="date"></dd>
-                    </dl>
-                    <dl>
-                        <dt>조회</dt>
-                        <dd id="count">0</dd>
-                    </dl>
-                </div>
-                <div id="content" class="contents">
-                    <p></p><br/>
+        <div id="content" class="contents">
+          <p></p><br />
 
-                </div>
-            </div>
-
-            
-            <div class="comment-box">
-                <font size="3">
-                    <ul id="cmtlist" class="comment-list">
-                        
-                        <!-- <li> 
-                            <div style="border:1px solid black;" class="replybox">
-                                <ul class="reply-list">
-                                    <li class="create-reply">
-                                        <div class="write-reply">
-                                            <textarea></textarea>
-                                        </div>
-                                        <button id="replybtn">등록</button>
-                                    </li>
-                                    <li class="reply-content">
-                                        <div class="useridbox" style="float:left; margin-right: 33px;">
-                                            <span>test12345</span>
-                                        </div>
-                                        <div class="reply-txtbox">
-                                            <p>ㄴreply1</p>
-                                        </div>
-                                    </li>
-                                    <li class="reply-content">
-                                        <div class="useridbox" style="float:left; margin-right: 33px;">
-                                            <span>test12345</span>
-                                        </div>
-                                        <div class="reply-txtbox">
-                                            <p>ㄴreply2</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li> -->
-                        
-                    </ul>
-                </font>
-            </div>
-            <div>
-                <div class="write-comment">
-                    <textarea id="comment-box"></textarea>
-                </div>
-                <button id="commentbtn">등록</button>
-            </div>
-
-            <div class="btn">
-                <a href="./index.html" class="on">목록</a>
-                <a href="./edit.html">수정</a>
-
-            </div>
         </div>
+      </div>
+
+
+      <div class="comment-box">
+
+        <ul id="cmtlist" class="comment-list">
+
+
+
+        </ul>
+
+      </div>
+      <div>
+        <!-- <div class="write-comment">
+          <textarea id="comment-box" placeholder="댓글 입력"></textarea>
+        </div>
+        <button id="commentbtn">등록</button> -->
+
+
+
+        <div class="comment_field">
+          <input type="text" id="comment-box" placeholder="댓글달기...">
+          <div class="upload_btn">게시</div>
+        </div>
+
+
+
+
+        <div class="btn">
+          <a href="./index.html" class="on">목록</a>
+          <a href="./edit.html">수정</a>
+
+        </div>
+      </div>
     </div>
 
 
     <script>
-        function replybox(i){
-            console.log(i.parentNode.parentNode);
-            let replybox = document.createElement("li");
-            replybox.innerHTML = `<div class="write-reply"><textarea></textarea></div><button id="replybtn">등록</button>`;
-            i.parentNode.parentNode.after(replybox);
-        }
+      function replybox(i) {
+        console.log(i.parentNode.parentNode);
+        let replybox = document.createElement("li");
+        replybox.innerHTML = `<div class="write-reply"><textarea></textarea></div><button id="replybtn">등록</button>`;
+        i.parentNode.parentNode.after(replybox);
+      }
     </script>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"; 
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"; 
         const firebaseConfig = { 
             apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg", 
             authDomain: "petper-14f9d.firebaseapp.com", 
@@ -138,7 +120,7 @@
         
         const dbref = ref(db);
 
-        const commentbtn= document.getElementById("commentbtn");
+        const commentbtn= document.getElementByclass("upload_btn");
 
         var currentUser = null;
 
