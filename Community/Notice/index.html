@@ -23,7 +23,7 @@
         <div class="board-list-wrap">
             <div id="FreeBoardList" class="board-list">
                 <div class="top">
-                    <div class="num">번호</div>
+                    <div class="number">번호</div>
                     <div class="title">제목</div>
                     <div class="writer">글쓴이</div>
                     <div class="date">작성일</div>
@@ -34,11 +34,11 @@
             <div class="board-page">
                 <a href="#" class="bt first">&lt;&lt;</a>
                 <a href="#" class="bt prev">&lt;</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="num">4</a>
-                <a href="#" class="num">5</a>
+                <a onclick="getPagenum(this)" id="1" class="num">1</a>
+                <a onclick="getPagenum(this)" id="2" class="num">2</a>
+                <a onclick="getPagenum(this)" id="3" class="num">3</a>
+                <a onclick="getPagenum(this)" id="4" class="num">4</a>
+                <a onclick="getPagenum(this)" id="5" class="num">5</a>
                 <a href="#" class="bt next">&gt;</a>
                 <a href="#" class="bt last">&gt;&gt;</a>
             </div>
@@ -50,60 +50,83 @@
         </div>
     </div>
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"; 
-    const firebaseConfig = { 
-        apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg", 
-        authDomain: "petper-14f9d.firebaseapp.com", 
-        databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
-        projectId: "petper-14f9d", 
-        storageBucket: "petper-14f9d.appspot.com",
-        messagingSenderId: "382691123578", 
-        appId: "1:382691123578:web:975408487ddb2e5fde76c3", 
-        measurementId: "G-71HYZ44KRJ" 
-    }; // Initialize Firebase 
-    const app = initializeApp(firebaseConfig);
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-    import { getDatabase, ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js"; 
-    const db = getDatabase();
-    const submit = document.getElementById('submitBtn');
-    const FreeBoardList = document.getElementById('FreeBoardList');
+    <script>
+        let page;
+        function getPagenum(pageNum) {
 
-    getFreeBoardList(1); // 0이면 게시글 1~10
+            page = $(pageNum).text();
 
-    function getFreeBoardList(page){   
-        const dbref = ref(db);
-        //let titlearray;
+            window.location = `/Community/Notice/index.html?page=${page}`;
+
+        }
+
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg",
+            authDomain: "petper-14f9d.firebaseapp.com",
+            databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
+            projectId: "petper-14f9d",
+            storageBucket: "petper-14f9d.appspot.com",
+            messagingSenderId: "382691123578",
+            appId: "1:382691123578:web:975408487ddb2e5fde76c3",
+            measurementId: "G-71HYZ44KRJ"
+        }; // Initialize Firebase 
+        const app = initializeApp(firebaseConfig);
+
+        import { getDatabase, ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+        const db = getDatabase();
+        const submit = document.getElementById('submitBtn');
+        const FreeBoardList = document.getElementById('FreeBoardList');
         
-        get(child(dbref, "BoardList/FreeBoard")).then((snapshot)=>{
-            if(snapshot.exists()){
 
-                // titlearray = snapshot.val();
-                // console.log(titlearray);
+        const receivedPageNum = location.search;
+        const params = new URLSearchParams(receivedPageNum);
+        page = params.get('page');
 
-                for(let i=page; i<page+11; i++){
-                    const form = document.createElement("div")
+        if(page==null){
+            page = 1;
+        }
+        
+        const currentpagenum = document.getElementById(page);
+        currentpagenum.classList.add('on');
+        currentpagenum.removeAttribute("onclick");
 
-                    form.innerHTML = `<div class="num">`+snapshot.val()[i].boardid+`</div><div class="title"><a href="./view.html?num=${snapshot.val()[i].boardid}">`+snapshot.val()[i].title+`</a></div><div class="writer">`+snapshot.val()[i].userid+`</div><div class="date">`+snapshot.val()[i].date+`</div><div class="count">0</div>`
-                    FreeBoardList.appendChild(form);
+        function getFreeBoardList(page) {
+            const dbref = ref(db);
+
+            get(child(dbref, "BoardList/FreeBoard")).then((snapshot) => {
+                if (snapshot.exists()) {
+
+                    for (let i = (page-1)*5+1; i <= page*5; i++) {
+                        const form = document.createElement("div")
+
+                        form.innerHTML = `<div class="number">${snapshot.val()[i].boardid}</div><div class="title"><a href="./view.html?page=${page}&num=${snapshot.val()[i].boardid}">${snapshot.val()[i].title}</a></div><div class="writer">${snapshot.val()[i].userid}</div><div class="date">${snapshot.val()[i].date}</div><div class="count">${snapshot.val()[i].count}</div>`
+                        FreeBoardList.appendChild(form);
+                    }
+
                 }
+            })
+                .catch((error) => {
+                    console.log(error);
+                })
+
+        }
+
+        function gotoFreeBoardWrite() {
+            window.location = "./write.html";
+        }
+
+        submit.addEventListener('click', gotoFreeBoardWrite);
+
+        getFreeBoardList(page); // 1이면 게시글 1~5
 
 
-            }
-        })
-        .catch((error)=>{
-            console.log(error); 
-        })
-
-    }
-
-    function gotoFreeBoardWrite(){
-        window.location="./write.html";
-    }
-
-    submit.addEventListener('click', gotoFreeBoardWrite);
-
-</script>
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <div class="userinfo">
+            <p id="userid">userid</p>
+            <p id="userpoint">userpoint</p>
+        </div>
+        <div class="button">
+            <button id="plusbtn">+</button>
+            <button id="minusbtn">-</button>
+        </div>
+    </div>
+    
+</body>
+
+<script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"; 
+    const firebaseConfig = { 
+        apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg", 
+        authDomain: "petper-14f9d.firebaseapp.com", 
+        databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
+        projectId: "petper-14f9d", 
+        storageBucket: "petper-14f9d.appspot.com",
+        messagingSenderId: "382691123578", 
+        appId: "1:382691123578:web:975408487ddb2e5fde76c3", 
+        measurementId: "G-71HYZ44KRJ" 
+    }; // Initialize Firebase 
+    const app = initializeApp(firebaseConfig);
+
+    import { getDatabase, ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js"; 
+    const db = getDatabase();
+    const dbref = ref(db);
+    const plusbtn = document.getElementById('plusbtn');
+    const minusbtn = document.getElementById('minusbtn');
+    const userid = document.getElementById('userid');
+    const userpoint = document.getElementById('userpoint');
+
+    let currentUser = null;
+
+    function getUserpoint(getUsername){
+        console.log(getUsername);   
+        get(child(dbref, `UsersList/${getUsername}`)).then((snapshot)=>{
+            if(snapshot.exists()){
+                userid.innerText = snapshot.val().id;
+                userpoint.innerText = `${snapshot.val().point}point`;
+            }
+
+        }).then(()=>{
+
+        }).catch((error)=>{
+            console.log(error); 
+        })
+    }
+
+    plusbtn.addEventListener('click', function(){
+
+        console.log("plusbtn");
+        get(child(dbref, `UsersList/${JSON.parse(localStorage.getItem('user')).id}`)).then((snapshot)=>{
+            if(snapshot.exists()){
+                update(ref(db, `UsersList/${JSON.parse(localStorage.getItem('user')).id}`),
+                {
+                    point: snapshot.val().point+10
+                })
+                .then(()=>{
+                    getUserpoint(JSON.parse(localStorage.getItem('user')).id);
+                }) 
+                .catch((error)=>{ 
+                    alert("error"+error); 
+                }) 
+            }
+
+        }).then(()=>{
+
+        }).catch((error)=>{
+            console.log(error); 
+        })
+        
+    });
+
+    minusbtn.addEventListener('click', function(){
+        console.log("minusbtn");
+        get(child(dbref, `UsersList/${JSON.parse(localStorage.getItem('user')).id}`)).then((snapshot)=>{
+            if(snapshot.exists()){
+                update(ref(db, `UsersList/${JSON.parse(localStorage.getItem('user')).id}`),
+                {
+                    point: snapshot.val().point-10
+                })
+                .then(()=>{
+                    getUserpoint(JSON.parse(localStorage.getItem('user')).id);
+                }) 
+                .catch((error)=>{ 
+                    alert("error"+error); 
+                }) 
+            }
+
+        }).then(()=>{
+
+        }).catch((error)=>{
+            console.log(error); 
+        })
+    });
+    
+
+    function getUsername() {
+        currentUser = JSON.parse(localStorage.getItem('user'));
+        return currentUser.id;
+    }
+
+    getUserpoint(getUsername());
+
+
+</script>
+
+</html>
