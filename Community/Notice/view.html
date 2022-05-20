@@ -67,141 +67,152 @@
 
         <div class="comment_field">
           <input type="text" id="comment-box" placeholder="댓글달기...">
-          <div class="upload_btn">게시</div>
-        </div>
-
-
-
-
-        <div class="btn">
-          <a href="./index.html" class="on">목록</a>
-          <a href="./edit.html">수정</a>
-
+          <button id="commentbtn" class="upload_btn">게시
         </div>
       </div>
+
+
+
+
+      <div class="btn">
+        <a href="./index.html" class="on">목록</a>
+        <a href="./edit.html">수정</a>
+
+      </div>
     </div>
+  </div>
 
 
-    <script>
-      function replybox(i) {
-        console.log(i.parentNode.parentNode);
-        let replybox = document.createElement("li");
-        replybox.innerHTML = `<div class="write-reply"><textarea></textarea></div><button id="replybtn">등록</button>`;
-        i.parentNode.parentNode.after(replybox);
-      }
-    </script>
+  <script>
+    function replybox(i) {
+      console.log(i.parentNode.parentNode);
+      let replybox = document.createElement("li");
+      replybox.innerHTML = `<div class="write-reply"><textarea></textarea></div><button id="replybtn">등록</button>`;
+      i.parentNode.parentNode.after(replybox);
+    }
+  </script>
 
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"; 
-        const firebaseConfig = { 
-            apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg", 
-            authDomain: "petper-14f9d.firebaseapp.com", 
-            databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
-            projectId: "petper-14f9d", 
-            storageBucket: "petper-14f9d.appspot.com",
-            messagingSenderId: "382691123578", 
-            appId: "1:382691123578:web:975408487ddb2e5fde76c3", 
-            measurementId: "G-71HYZ44KRJ" 
-        }; // Initialize Firebase 
-        const app = initializeApp(firebaseConfig);
-    
-        import { getDatabase, ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js"; 
-        const db = getDatabase();
-        const receivedBoardId = location.search;
-        const params = new URLSearchParams(receivedBoardId);
-        const num = params.get('num');
-        const boardid = document.getElementById('num');
-        const userid = document.getElementById('userid');
-        const count = document.getElementById('count');
-        const date = document.getElementById('date');
-        const content = document.getElementById('content');
-        const title = document.getElementById('title');
-        const cmtlist = document.getElementById('cmtlist');
-        
-        const dbref = ref(db);
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg",
+      authDomain: "petper-14f9d.firebaseapp.com",
+      databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
+      projectId: "petper-14f9d",
+      storageBucket: "petper-14f9d.appspot.com",
+      messagingSenderId: "382691123578",
+      appId: "1:382691123578:web:975408487ddb2e5fde76c3",
+      measurementId: "G-71HYZ44KRJ"
+    }; // Initialize Firebase 
+    const app = initializeApp(firebaseConfig);
 
-        const commentbtn= document.getElementByclass("upload_btn");
+    import { getDatabase, ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+    const db = getDatabase();
+    const receivedBoardId = location.search;
+    const params = new URLSearchParams(receivedBoardId);
+    const num = params.get('num');
+    const boardid = document.getElementById('num');
+    const userid = document.getElementById('userid');
+    const count = document.getElementById('count');
+    const date = document.getElementById('date');
+    const content = document.getElementById('content');
+    const title = document.getElementById('title');
+    const cmtlist = document.getElementById('cmtlist');
 
-        var currentUser = null;
+    const dbref = ref(db);
 
-        function setCommentDB(getUsername){
-            var commentBoxValue= document.getElementById("comment-box").value;
+    const commentbtn = document.getElementById('commentbtn');
 
-            get(child(dbref, "BoardList/Comment")).then((snapshot)=>{ 
-                let commentmaxid = snapshot.val().maxid;
-                let date = new Date();
+    var currentUser = null;
 
-                update(ref(db, "BoardList/Comment"),
-                {
-                    [commentmaxid]: {
-                        date: date.toLocaleString(), //년월일시간 가져오는 함수
-                        userid: getUsername, //localstorage
-                        comment: commentBoxValue, 
-                        commentid: commentmaxid,
-                        boardid: num
-                    },
-                    maxid: commentmaxid+1
-                    
-                })
-                .then(()=>{
-                }) 
-                .catch((error)=>{ 
-                    alert("error"+error); 
-                }) 
+    function setCommentDB(getUsername) {
+      var commentBoxValue = document.getElementById("comment-box").value;
 
-                get(child(dbref, "BoardList/FreeBoard/"+num+"/CommentList")).then((snapshot)=>{ 
-                    let maxid = snapshot.val().maxid;
-                    
-                    update(ref(db, "BoardList/FreeBoard/"+num+"/CommentList"),
-                    {
-                        
-                        ["comment"+maxid]: commentmaxid,
-                        maxid:maxid+1
-                    })
-                    .then(()=>{
-                        
-                        getBoardDB();
-                    }) 
-                    .catch((error)=>{ 
-                        alert("error"+error); 
-                    }) 
-                    
-                });
-                
-            }).then(()=>{
-                
-            });
+      get(child(dbref, "BoardList/Comment")).then((snapshot) => {
+        let commentmaxid = snapshot.val().maxid;
+        let date = new Date();
 
-        }
+        update(ref(db, "BoardList/Comment"),
+          {
+            [commentmaxid]: {
+              date: date.toLocaleString(), //년월일시간 가져오는 함수
+              userid: getUsername, //localstorage
+              comment: commentBoxValue,
+              commentid: commentmaxid,
+              boardid: num
+            },
+            maxid: commentmaxid + 1
 
-        function getUsername() {
-            currentUser = JSON.parse(localStorage.getItem('user'));
-            return currentUser.id;
-        }
-        
-        
+          })
+          .then(() => {
+          })
+          .catch((error) => {
+            alert("error" + error);
+          })
 
-        function getBoardDB(){
-            get(child(dbref, "BoardList/FreeBoard/"+num)).then((freeboardsnapshot)=>{
-                if(freeboardsnapshot.exists()){
-                    boardid.innerText = freeboardsnapshot.val().boardid;
-                    userid.innerText = freeboardsnapshot.val().userid;
-                    date.innerText = freeboardsnapshot.val().date;
-                    content.innerText = freeboardsnapshot.val().content;
-                    title.innerText = freeboardsnapshot.val().title;
-                    //count.innerText = snapshot.val().count;
+        get(child(dbref, "BoardList/FreeBoard/" + num + "/CommentList")).then((snapshot) => {
+          let maxid = snapshot.val().maxid;
 
-                    get(child(dbref, "BoardList/Comment/")).then((cmtsnapshot)=>{
-                        if(cmtsnapshot.exists()){
+          update(ref(db, "BoardList/FreeBoard/" + num + "/CommentList"),
+            {
 
-                            while(cmtlist.hasChildNodes()) {
-                                cmtlist.removeChild(cmtlist.childNodes[0])
-                            }
+              ["comment" + maxid]: commentmaxid,
+              maxid: maxid + 1
+            })
+            .then(() => {
 
-                            for(let i=1; i<Object.keys(freeboardsnapshot.val().CommentList).length;i++){
-                                let cmtidlist = freeboardsnapshot.val().CommentList[`comment${i}`]
-                                const form = document.createElement("li");
-                                form.innerHTML = `<li class="comment">
+              getBoardDB();
+            })
+            .catch((error) => {
+              alert("error" + error);
+            })
+
+        });
+
+      }).then(() => {
+
+      });
+
+    }
+
+    function getUsername() {
+      currentUser = JSON.parse(localStorage.getItem('user'));
+      return currentUser.id;
+    }
+
+
+
+    function getBoardDB() {
+      get(child(dbref, "BoardList/FreeBoard/" + num)).then((freeboardsnapshot) => {
+        if (freeboardsnapshot.exists()) {
+          update(ref(db, "BoardList/FreeBoard/" + num),
+            {
+              count: freeboardsnapshot.val().count + 1
+            })
+            .then(() => {
+              boardid.innerText = freeboardsnapshot.val().boardid;
+              userid.innerText = freeboardsnapshot.val().userid;
+              date.innerText = freeboardsnapshot.val().date;
+              content.innerText = freeboardsnapshot.val().content;
+              title.innerText = freeboardsnapshot.val().title;
+              count.innerText = freeboardsnapshot.val().count + 1;
+            })
+            .catch((error) => {
+              alert("error" + error);
+            })
+          
+
+          get(child(dbref, "BoardList/Comment/")).then((cmtsnapshot) => {
+            if (cmtsnapshot.exists()) {
+
+              while (cmtlist.hasChildNodes()) {
+                cmtlist.removeChild(cmtlist.childNodes[0])
+              }
+
+              for (let i = 1; i < Object.keys(freeboardsnapshot.val().CommentList).length; i++) {
+                let cmtidlist = freeboardsnapshot.val().CommentList[`comment${i}`]
+                const form = document.createElement("li");
+                form.innerHTML = `<li class="comment">
                                     <div class="useridbox" style="float:left; margin-right: 33px;">
                                     <span>${cmtsnapshot.val()[cmtidlist].userid}</span>
                                     </div>
@@ -209,33 +220,34 @@
                                         <a onclick="replybox(this)">${cmtsnapshot.val()[cmtidlist].comment}</a>
                                     </div>
                                 </li>`
-                                cmtlist.appendChild(form);
-                            }
-                            
-                        }
-                    }).then(()=>{
+                cmtlist.appendChild(form);
+              }
 
-                    })
-                    .catch((error)=>{
-                        console.log(error); 
-                    })
-                }
-            })
-            .catch((error)=>{
-                console.log(error); 
-            })
+            }
+          }).then(() => {
 
+
+          })
+            .catch((error) => {
+              console.log(error);
+            })
         }
+      })
+        .catch((error) => {
+          console.log(error);
+        })
+
+    }
 
 
-        commentbtn.addEventListener('click', function(){
-            setCommentDB(getUsername());
-        });
+    commentbtn.addEventListener('click', function () {
+      setCommentDB(getUsername());
+    });
 
-        getBoardDB();
-        
-    
-    </script>
+    getBoardDB();
+
+
+  </script>
 
 </body>
 
