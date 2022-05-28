@@ -5,53 +5,17 @@ let y_ln = 126.534805;
 var $area = document.querySelectorAll('.area > path');
 
 
-/*https://github.com/fridaygmman/information-blog/blob/master/_posts/2020-01-26-hosinfo.html
-    여기 참고해서 인포윈도우 설계할 것
-
-*/
-
-
 for (let i = 0; i < 13; i++) {
     $area[i].addEventListener('click', function() {
-        console.log('area' + i);
+        
         switch (i) {
             case 0:
                 x_ln = 33.476343;
                 y_ln = 126.534805;
-                var positions = [{
-                        content: 'test 1',
-                        lating: new kakao.maps.LatLng(33.476095, 126.537977)
-                    },
-                    {
-                        content: 'test 2',
-                        lating: new kakao.maps.LatLng(33.477035, 126.540450)
-                    },
-                    {
-                        content: 'test 3',
-                        lating: new kakao.maps.LatLng(33.472789, 126.539465)
-                    },
-                    {
-                        content: 'test 4',
-                        lating: new kakao.maps.LatLng(33.474854, 126.533909)
-                    }
-                ];
                 break;
             case 1:
                 x_ln = 33.485557;
                 y_ln = 126.681193;
-                var positions = [{
-                        lating: new kakao.maps.LatLng(33.490017, 126.676519)
-                    },
-                    {
-                        lating: new kakao.maps.LatLng(33.489049, 126.677565)
-                    },
-                    {
-                        lating: new kakao.maps.LatLng(33.487602, 126.680346)
-                    },
-                    {
-                        lating: new kakao.maps.LatLng(33.485846, 126.678267)
-                    }
-                ];
                 break;
             case 2:
                 x_ln = 33.503121;
@@ -102,20 +66,19 @@ for (let i = 0; i < 13; i++) {
                 y_ln = 126.378670;
                 break;
         }
-        console.log(x_ln);
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
                 center: new kakao.maps.LatLng(x_ln, y_ln), // 지도의 중심좌표
-                level: 4 // 지도의 확대 레벨
+                level: 8 // 지도의 확대 레벨
             };
 
         // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        for (var j = 0; j < positions.length; j++) {
+        for (var j = 0; j < place_data.length; j++) {
             var marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
-                position: positions[j].lating, // 마커를 표시할 위치
+                position: new kakao.maps.LatLng(place_data[j].y, place_data[j].x), // 마커를 표시할 위치
             });
             /*
             var overlay = new kakao.maps.CustomOverlay({
@@ -150,20 +113,33 @@ for (let i = 0; i < 13; i++) {
             var Customcontent = document.createElement('div');
 			Customcontent.className = "board";
 
-            var content_name = document.createElement("div");
+            // 업체 이름 content_name > name_board
+            var content_name = document.createElement("div"); // content_name
             content_name.className = "name";
-            content_name.appendChild(document.createTextNode(positions[j].content));
+            var name_board = document.createElement("div"); // name_board
+            name_board.className = "name_board";
+            name_board.appendChild(document.createTextNode(place_data[j].name));
+            content_name.appendChild(name_board);
             Customcontent.appendChild(content_name);
 
+            // 닫기 버튼
             var close_btn = document.createElement("div");
 			close_btn.className = "close";
 			close_btn.setAttribute("name","닫기");
 			content_name.appendChild(close_btn);
 
-            var info = document.createElement("div");
+            // 업체 정보 info > info_address | info_phone
+            var info = document.createElement("div");            // info
             info.className = "info";
-            info.appendChild(document.createTextNode(positions[j].content));
+            var info_address = document.createElement("div");    // info_address
+            info_address.className = "info_address";
+            var info_phone = document.createElement("div");    // info_phone
+            info_phone.className = "info_phone";
+            info_address.appendChild(document.createTextNode(place_data[j].address_name));
+            info_phone.appendChild(document.createTextNode(place_data[j].phone));
             Customcontent.appendChild(info);
+            info.appendChild(info_address);
+            info.appendChild(info_phone);
 
             CustomOverlay.setContent(Customcontent);
 
