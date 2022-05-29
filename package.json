@@ -1,0 +1,23 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "description": "```\r 홍기준(팀장) : 프론트엔드\r 진승호 : 프론트엔드\r 안상민 : 백엔드\r 게렐마 설렁거 : 모델수집, UI디자인\r ```",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sang9831/12_team_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sang9831/12_team_project/issues"
+  },
+  "homepage": "https://github.com/sang9831/12_team_project#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
