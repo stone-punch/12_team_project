@@ -135,11 +135,14 @@ for (let i = 0; i < 13; i++) {
             info_address.className = "info_address";
             var info_phone = document.createElement("div");    // info_phone
             info_phone.className = "info_phone";
+            var info_button = document.createElement("button");    // info_button
+            info_button.className = "info_button";
             info_address.appendChild(document.createTextNode(place_data[j].address_name));
             info_phone.appendChild(document.createTextNode(place_data[j].phone));
             Customcontent.appendChild(info);
             info.appendChild(info_address);
             info.appendChild(info_phone);
+            info.appendChild(info_button);
 
             CustomOverlay.setContent(Customcontent);
 

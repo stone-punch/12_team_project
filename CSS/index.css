@@ -385,7 +385,7 @@ header .main-menu .item .item__contants .contants__texture p {
 
 .board .info {
   width: 200px;
-  height: 100px;
+  height: 115px;
   border-left: 1px solid rgb(218, 218, 218);
   border-right: 1px solid rgb(218, 218, 218);
   border-bottom: 1px solid rgb(218, 218, 218);
@@ -412,6 +412,16 @@ header .main-menu .item .item__contants .contants__texture p {
   margin-left: 5px;
   color: rgb(21, 161, 255);
   font-size: 12px;
+}
+
+.board .info .info_button{
+  width: 70px;
+  height: 25px;
+  margin-left: 60px;
+  margin-top: 5px;
+
+  background-color: #ebebeb;
+  border: 1px solid #c2c2c2;
 }
 
 
