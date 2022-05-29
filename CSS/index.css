@@ -282,7 +282,7 @@ header .main-menu .item .item__contants .contants__texture p {
   width: 70%;
   height: 70%;
   margin: 2em 0;
-  background: #327aff;
+  background: rgb(194, 218, 238);
 }
 
 
@@ -436,7 +436,7 @@ header .main-menu .item .item__contants .contants__texture p {
   border-radius: 30px;
   color: white;
   text-align: center;
-  background: #1cb1c9;
+  background: #a1d5ff;
 }
 
 #main-footer {
