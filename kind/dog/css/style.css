@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+body {
+  font-size: 0.9em;
+  font-family: "Lucida Grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+#wrapper {
+  width: 100%;
+  margin: 0 auto;
+  background-color: gray;
+  position: absolute;
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  background-color: lightgray;
+
+}
+
+nav {
+  width: 20%;
+  float: left;
+  background: red;
+
+}
+
+nav .main-menu {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  box-sizing: border-box;
+  border: 1px solid #bbb;
+  /* background-color: #fff; */
+}
+
+nav .main-menu>li:hover .sub-menu {
+  display: block;
+}
+
+nav .main-menu>li:hover a {
+  background-color: bisque;
+  color: #fff;
+}
+
+nav .main-menu>li {}
+
+nav .main-menu>li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+nav .main-menu>li .sub-menu {
+  display: none;
+  width: 100%;
+  height: 160px;
+  background-color: #bbb;
+  box-sizing: border-box;
+}
+
+nav .main-menu>li .sub-menu li {
+  width: 100%;
+  height: 40px;
+}
+
+nav .main-menu>li .sub-menu li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.contents {
+  width: 80%;
+  float: right;
+  background: blue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#main-footer {
+  width: 100%;
+  height: 100px;
+  background: #eeeeee;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+}
+
+#main-footer .copy {
+  width: 80%;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  float: left;
+}
+
+#main-footer .sns {
+  width: 20%;
+  height: 100px;
+  float: left;
+}
+
+#main-footer .sns ul {
+  width: 100%;
+  height: 100%;
+}
+
+#main-footer .sns ul li {
+  width: 100%;
+  height: 30px;
+  margin: 2px 0;
+  line-height: 30px;
+  text-align: center;
+  background: #40E0D0;
+}
+
+#main-footer .sns ul li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#main-footer .sns ul li:hover {
+  opacity: 0.8;
+}

@@ -30,9 +30,9 @@ a {
 }
 
 .inner {
-  width: 1100px;
+  width: 100%;
   margin: 0 auto;
-  position: relative;
+  /* position: relative; */
 }
 
 .clearfix:after {
@@ -41,16 +41,25 @@ a {
   clear: both;
 }
 
+#wrap {
+  position: relative;
+}
 
 /* HEADER */
 
 header {
+  width: 100%;
+  height: 120px;
   background-color: #f6f5f0;
   border-bottom: 1px solid #c8c8c8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
 }
 
 header>.inner {
-  /* width: 1100px; */
+  width: 100vh;
   height: 120px;
   /* relative -> 기준 대상 */
   /* position: relative; */
@@ -269,10 +278,14 @@ header .main-menu .item .item__contants .contants__texture p {
 
 #main-content {
   width: 100%;
+  height: calc(100vh - 220px);
+  overflow: auto;
+  padding-top: 250px;
+  padding-bottom: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #CCCCFF;
+  /* background: #CCCCFF; */
 }
 
 /* map-container플렉스 레이아웃으로 변경 */
@@ -341,7 +354,7 @@ header .main-menu .item .item__contants .contants__texture p {
   height: 150px;
   margin-left: -144px;
   text-align: left;
-  
+
   /*border: 1px solid rgb(182, 182, 182);*/
 }
 
@@ -351,22 +364,22 @@ header .main-menu .item .item__contants .contants__texture p {
   border-bottom: 1px solid rgb(179, 179, 179);
   border-radius: 5px;
   background-color: rgb(173, 173, 173);
-  
+
   border: 1px solid rgb(141, 141, 141);
 
   font-weight: bold;
-  
+
   text-align: left;
   white-space: normal;
 }
 
-.board .name .name_board{
+.board .name .name_board {
   position: absolute;
   width: 170px;
   top: 12px;
   left: 5px;
   font-size: 18px;
-  
+
 }
 
 .board .name .close {
@@ -392,14 +405,14 @@ header .main-menu .item .item__contants .contants__texture p {
   border-radius: 7px;
   background-color: rgb(255, 255, 255);
 
-  
+
   white-space: normal;
 
   display: flex;
   flex-direction: column;
 }
 
-.board .info .info_address{
+.board .info .info_address {
   margin-top: 10px;
   margin-left: 2px;
   color: rgb(99, 99, 99);
@@ -407,14 +420,14 @@ header .main-menu .item .item__contants .contants__texture p {
   font-size: 15px;
 }
 
-.board .info .info_phone{
+.board .info .info_phone {
   margin-top: 10px;
   margin-left: 5px;
   color: rgb(21, 161, 255);
   font-size: 12px;
 }
 
-.board .info .info_button{
+.board .info .info_button {
   width: 70px;
   height: 25px;
   margin-left: 60px;
@@ -443,6 +456,10 @@ header .main-menu .item .item__contants .contants__texture p {
   width: 100%;
   height: 100px;
   background: #eeeeee;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
 }
 
 #main-footer .copy {
