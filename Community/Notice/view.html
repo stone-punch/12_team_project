@@ -180,8 +180,6 @@
       return currentUser.id;
     }
 
-
-
     function getBoardDB() {
       get(child(dbref, "BoardList/FreeBoard/" + num)).then((freeboardsnapshot) => {
         if (freeboardsnapshot.exists()) {
