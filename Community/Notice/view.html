@@ -71,12 +71,9 @@
         </div>
       </div>
 
-
-
-
       <div class="btn">
         <a href="./index.html" class="on">목록</a>
-        <a href="./edit.html">수정</a>
+        <button id="modifybtn">수정</button>  
 
       </div>
     </div>
@@ -118,6 +115,7 @@
     const content = document.getElementById('content');
     const title = document.getElementById('title');
     const cmtlist = document.getElementById('cmtlist');
+    const modifybtn = document.getElementById('modifybtn');
 
     const dbref = ref(db);
 
@@ -194,6 +192,12 @@
               content.innerText = freeboardsnapshot.val().content;
               title.innerText = freeboardsnapshot.val().title;
               count.innerText = freeboardsnapshot.val().count + 1;
+
+              if( JSON.parse(localStorage.getItem('user')).id != userid.innerText ){
+                console.log(JSON.parse(localStorage.getItem('user')).id);
+                console.log(userid.innerText);
+                modifybtn.style.visibility = "hidden";
+              }
             })
             .catch((error) => {
               alert("error" + error);
@@ -236,7 +240,10 @@
         })
 
     }
-
+    
+    modifybtn.addEventListener('click', function () {
+      window.location = `./modify.html?num=${num}`;
+    });
 
     commentbtn.addEventListener('click', function () {
       setCommentDB(getUsername());

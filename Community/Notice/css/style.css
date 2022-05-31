@@ -310,7 +310,7 @@ a {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  pointer-events: none;
+  /* pointer-events: none; */
   opacity: 0.6;
 }
 

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+
+
+    <link rel="stylesheet" href="./css/css.css">
+
+
+</head>
+
+<body>
+
+    <div class="board-wrap">
+        <div class="board-title">
+            <strong><a href="./index.html">공지사항</a></strong>
+            <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+        </div>
+        <div class="board-write-wrap">
+            <div class="board-write">
+
+                <div class="title">
+                    <dl>
+                        <dt>제목</dt>
+                        <dd><input type="text" id="title" placeholder="제목입력"></dd>
+                    </dl>
+                </div>
+                <div class="info">
+                    <dl>
+                        <dt>글쓴이</dt>
+                        <dd id="userid"></dd>
+                    </dl>
+                    
+                </div>
+                <div class="contents">
+                    <textarea id="content" placeholder="내용 입력"></textarea>
+                </div>
+            </div>
+
+            <div class="btn">
+                <button class="on" id="modifybtn">수정</button>
+                <a onclick="history.go(-1)">취소</a>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg",
+      authDomain: "petper-14f9d.firebaseapp.com",
+      databaseURL: "https://petper-14f9d-default-rtdb.firebaseio.com",
+      projectId: "petper-14f9d",
+      storageBucket: "petper-14f9d.appspot.com",
+      messagingSenderId: "382691123578",
+      appId: "1:382691123578:web:975408487ddb2e5fde76c3",
+      measurementId: "G-71HYZ44KRJ"
+    }; // Initialize Firebase 
+
+    const app = initializeApp(firebaseConfig);
+
+    import { getDatabase, ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+    const db = getDatabase();
+    const dbref = ref(db);
+    const receivedBoardId = location.search;
+    const params = new URLSearchParams(receivedBoardId);
+    const num = params.get('num');
+    const title = document.getElementById('title');
+    const content = document.getElementById('content');
+    const userid = document.getElementById('userid');
+    const modifybtn = document.getElementById('modifybtn');
+
+    userid.innerText = JSON.parse(localStorage.getItem('user')).id;
+
+    function modifyBoardDB() {
+      get(child(dbref, "BoardList/FreeBoard/" + num)).then((freeboardsnapshot) => {
+        if (freeboardsnapshot.exists()) {
+          update(ref(db, "BoardList/FreeBoard/" + num),{
+            title: title.value,
+            content: content.value,
+          })
+          .then(() => {
+            window.location = "./index.html"
+          })
+          .catch((error) => {
+              alert("error" + error);
+            })
+          
+        }
+      })
+    }
+
+    modifybtn.addEventListener('click' , function() {
+        modifyBoardDB();
+    })
+
+</script>
+    
+
+
+</html>
