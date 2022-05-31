@@ -1,8 +1,8 @@
 /*
-    code 종류
-    AD5 - 숙박
-    FD6 - 음식점
-    CE7 - 카페
+     - code 종류 -
+       AD5 - 숙박 - blue
+       FD6 - 음식점 - green
+       CE7 - 카페 - beige
 */ 
 
 

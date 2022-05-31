@@ -1,6 +1,3 @@
-let x_ln = 33.476343;
-let y_ln = 126.534805;
-
 
 var $area = document.querySelectorAll('.area > path');
 
@@ -75,31 +72,16 @@ for (let i = 0; i < 13; i++) {
         // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
+        
+    
+
         for (var j = 0; j < place_data.length; j++) {
             var marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
                 position: new kakao.maps.LatLng(place_data[j].y, place_data[j].x), // 마커를 표시할 위치
             });
-            /*
-            var overlay = new kakao.maps.CustomOverlay({
-                content: '<div class="board">' +
-                    '<div class="name">' + positions[j].content +
-                    '    <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-                    '</div>' +
-                    '    <div class="info">test_info</div>' +
-                    '</div>',
-                map: map,
-                position: marker.getPosition()
-            });
-            kakao.maps.event.addListener(marker, 'click', function() {
-                overlay.setMap(map);
-            });
-            var close_btn = document.createElement('button');
-            close_btn.onclick = function() {
-                overlay.setMap(null);
-            };
-            */
-
+            
+          
             /* 지도 출력시에 div크기 자동 변경*/
             var mapContainer = document.querySelector('.map-container');
             //mapContainer.style.width = '700px';
@@ -116,6 +98,21 @@ for (let i = 0; i < 13; i++) {
             // 업체 이름 content_name > name_board
             var content_name = document.createElement("div"); // content_name
             content_name.className = "name";
+            if(place_data[j].code == "AD5"){
+                content_name.classList.add('blue');
+                
+            }
+            else if(place_data[j].code == 'FD6'){
+                content_name.classList.add('green');
+            }
+            else if(place_data[j].code == 'CE7'){
+                content_name.classList.add('beige');
+            }
+            else{
+                content_name.classList.add('none');
+
+            }
+
             var name_board = document.createElement("div"); // name_board
             name_board.className = "name_board";
             name_board.appendChild(document.createTextNode(place_data[j].name));
