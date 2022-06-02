@@ -1,113 +1,159 @@
+/* COMMON */
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
-
-
 
 body {
-  font-size: 0.9em;
-  font-family: "Lucida Grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-family: "맑은고딕";
+  color: #222328;
+  background-color: #fff;
 }
 
-p {
-  margin-bottom: 20px;
-}
-
-li {
-  list-style: none;
-  margin-bottom: 10px;
+img {
+  vertical-align: top;
 }
 
 a {
+  color: black;
   text-decoration: none;
-  color: white;
 }
 
-#wrapper {
-  width: 100%;
+ul {
+  list-style: none;
+}
+
+.clearfix::after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
+/* 커스텀 */
+
+.wrap {
+  width: 1000px;
   margin: 0 auto;
-  background-color: gray;
-  position: absolute;
 }
 
 header {
-  width: 100%;
-  height: 80px;
-  padding: 10px;
-  background-color: lightgray;
-
-}
-
-nav {
-  width: 20%;
   float: left;
-  background: red;
-
 }
 
-nav .main-menu {
-  width: 100%;
-  text-align: center;
-  font-size: 18px;
-  box-sizing: border-box;
-  border: 1px solid #bbb;
-  /* background-color: #fff; */
+header .top {
+  width: 200px;
+  height: 650px;
 }
 
-nav .main-menu>li:hover .sub-menu {
-  display: block;
-}
-
-nav .main-menu>li:hover a {
-  background-color: bisque;
-  color: #fff;
-}
-
-nav .main-menu>li {}
-
-nav .main-menu>li a {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-nav .main-menu>li .sub-menu {
-  display: none;
-  width: 100%;
-  height: 160px;
-  background-color: #bbb;
-  box-sizing: border-box;
-}
-
-nav .main-menu>li .sub-menu li {
-  width: 100%;
+header .top .logo {
+  width: 200px;
   height: 40px;
+  margin: 30px 0 30px 0;
+  float: left;
 }
 
-nav .main-menu>li .sub-menu li a {
+header .top .logo a {
   display: block;
   width: 100%;
   height: 100%;
 }
+
+header .top .menu {
+  width: 180px;
+  top: 100px;
+  text-align: center;
+
+}
+
+header .top .menu .main-menu>li {
+  float: left;
+  width: 180px;
+
+}
+
+header .top .menu .main-menu>li>a {
+  display: block;
+  width: 180px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #222328;
+  color: #ffffff;
+}
+
+header .top .menu .main-menu>li>a:hover {
+  background-color: #930930;
+  color: #ffff00;
+}
+
+header .top .menu .main-menu>li .sub-menu {
+  float: left;
+  display: none;
+  width: 180px;
+
+}
+
+
+header .top .menu .main-menu>li .sub-menu li a {
+  display: block;
+  width: 180px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #cccccc;
+  color: #ffffff;
+}
+
+header .top .menu .main-menu>li .sub-menu li a:hover {
+  background-color: #999999;
+  color: #ffff00;
+}
+
+
 
 .contents {
-  width: 80%;
+  width: 800px;
+  height: 200px;
   float: right;
-  background: blue;
 }
 
+.contents header {
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  /* background-color: blue; */
+}
 
+.contents .con-menu {
+  width: 350px;
+  height: 40px;
+  margin-top: 20px;
+  margin-right: 40px;
+  line-height: 40px;
+  text-align: center;
+  /* background-color: #40E0D0; */
+  float: right;
+}
 
+.contents .con-menu li {
+  margin: 10px;
+  /* background-color: #40E0D0; */
+}
 
+.contents .con-menu li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
-
-
-
-
-
-
-
+.contents .con-menu li a:hover {
+  background-color: #930930;
+  opacity: 0.8;
+}
 
 #main-footer {
   width: 100%;
