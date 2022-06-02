@@ -100,16 +100,32 @@ for (let i = 0; i < 13; i++) {
             content_name.className = "name";
             if(place_data[j].code == "AD5"){
                 content_name.classList.add('blue');
+                var markerImage = new kakao.maps.MarkerImage(
+                    './marker_img/blue_marker.png',
+                    new kakao.maps.Size(26, 40), new kakao.maps.Point(13, 39));
+                marker.setImage(markerImage);
                 
             }
             else if(place_data[j].code == 'FD6'){
                 content_name.classList.add('green');
+                var markerImage = new kakao.maps.MarkerImage(
+                    './marker_img/green_marker.png',
+                    new kakao.maps.Size(26, 40), new kakao.maps.Point(13, 39));
+                marker.setImage(markerImage);
             }
             else if(place_data[j].code == 'CE7'){
                 content_name.classList.add('beige');
+                var markerImage = new kakao.maps.MarkerImage(
+                    './marker_img/beige_marker.png',
+                    new kakao.maps.Size(26, 40), new kakao.maps.Point(13, 39));
+                marker.setImage(markerImage);
             }
             else{
                 content_name.classList.add('none');
+                var markerImage = new kakao.maps.MarkerImage(
+                    './marker_img/gray_marker.png',
+                    new kakao.maps.Size(26, 40), new kakao.maps.Point(13, 39));
+                marker.setImage(markerImage);
 
             }
 
