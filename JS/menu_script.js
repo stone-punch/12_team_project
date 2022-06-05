@@ -1,10 +1,31 @@
 
 var $area = document.querySelectorAll('.area > path');
 
+var $b1 = document.querySelector('.b1');
+var $b2 = document.querySelector('.b2');
+
+var distance = 0;
+
+function b1_click(){
+    distance = 0.01;
+    console.log(distance);
+    return distance;
+}
+
+function b2_click(){
+    distance = 0.15;
+    console.log(distance);
+    return distance;
+}
+
+
+
+$b1.addEventListener('click',b1_click);
+$b2.addEventListener('click',b2_click);
+
 
 for (let i = 0; i < 13; i++) {
-    $area[i].addEventListener('click', function() {
-        
+    $area[i].addEventListener('click', function() { 
         switch (i) {
             case 0:
                 x_ln = 33.476343;
@@ -72,20 +93,60 @@ for (let i = 0; i < 13; i++) {
         // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        
+
+
+
+        var center_marker = new kakao.maps.Marker({ 
+            // 지도 중심좌표에 마커를 생성합니다 
+            //position: new kakao.maps.LatLng(0,0)
+            position: map.getCenter() 
+        }); 
+
+        var center_markerImage = new kakao.maps.MarkerImage(
+                './marker_img/center_marker.png',
+                new kakao.maps.Size(50, 50), new kakao.maps.Point(25, 25));
+                center_marker.setImage(center_markerImage);
+
+
+
     
 
         for (var j = 0; j < place_data.length; j++) {
             var marker = new kakao.maps.Marker({
-                map: map, // 마커를 표시할 지도
+                //map: map, // 마커를 표시할 지도
                 position: new kakao.maps.LatLng(place_data[j].y, place_data[j].x), // 마커를 표시할 위치
             });
+
+
+            
+            
+            kakao.maps.event.addListener(map, 'click', function(mouseEvent) {       
+                
+                map.relayout();
+                
+                // 클릭한 위도, 경도 정보를 가져옵니다 
+                var latlng = mouseEvent.latLng; 
+                
+                // 마커 위치를 클릭한 위치로 옮깁니다
+                center_marker.setPosition(latlng);
+                center_marker.setMap(map);
+                
+            });
+
+            var lating = center_marker.getPosition();
+            var gop =  (place_data[j].y - 33.476343)*(place_data[j].y - 33.476343) + (place_data[j].x - 126.534805)*(place_data[j].x - 126.534805) ;
+            var root = Math.sqrt(gop);
+
+            if(root<distance){
+                marker.setMap(map);
+            }
+
             
           
             /* 지도 출력시에 div크기 자동 변경*/
-            var mapContainer = document.querySelector('.map-container');
+            var mapContainer = document.querySelector('#map');
             //mapContainer.style.width = '700px';
-            mapContainer.style.height = '1000px'; 
+            mapContainer.style.height = '95%'; 
             map.relayout();
            
             var CustomOverlay = new kakao.maps.CustomOverlay({
@@ -169,6 +230,8 @@ for (let i = 0; i < 13; i++) {
             })(marker, CustomOverlay);
            
             //CustomOverlay.setMap(null);
+
+             // 마커 출력
             
         }
 
