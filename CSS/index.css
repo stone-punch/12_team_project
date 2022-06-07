@@ -310,7 +310,7 @@ header .main-menu .item .item__contants .contants__texture p {
    width: 50%;
    height: 40%;
    margin-top: 10px;
-   border: 1px solid black;
+  
 }
 
 .map_container .map_board .map_control{
@@ -322,7 +322,9 @@ header .main-menu .item .item__contants .contants__texture p {
   width: 95%;
   height: 55%;
   margin-top: 10px;
-  border: 1px solid black;
+
+  background-color: rgb(184, 217, 255);
+  border: 1px solid rgb(156, 202, 255);
   
 }
 
@@ -332,18 +334,31 @@ header .main-menu .item .item__contants .contants__texture p {
   
   margin-left: 10px;
 
-  border: 1px solid black;
+  
 }
 
 .map_container .map_board .map_control .map_control_panel{
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
   width: 27%;
   height: 90%;
 
   margin-left: 15px;
 
-  border: 1px solid black;
+  background-color: rgb(157, 203, 255);
+  border: 1px solid rgb(112, 179, 255);
 }
 
+.map_container .map_board .map_control .map_control_panel button{
+  width: 50%;
+  height: 50px;
+  margin-top: 10px;
+}
 
 
 [class *='area']:hover {
