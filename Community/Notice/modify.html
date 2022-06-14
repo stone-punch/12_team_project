@@ -2,57 +2,87 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항</title>
 
 
-    <link rel="stylesheet" href="./css/css.css">
+  <link rel="stylesheet" href="./css/css.css">
+
+  <!-- 아이콘 받아오기 -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
 
 
 </head>
 
 <body>
 
-    <div class="board-wrap">
-        <div class="board-title">
-            <strong><a href="./index.html">공지사항</a></strong>
-            <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+  <div class="board-wrap">
+    <!-- HEADER -->
+    <header>
+      <div class="inner">
+
+        <a href="/" class="logo">
+          <img src="/images/logo.png" alt="PETOPIA">
+        </a>
+        <div class="sub-menu">
+          <div class="person">
+            <p id="welcomeuser">님 환영합니다.</p>
+            <button id="logoutBtn" class="logout">로그아웃</button>
+          </div>
+          <ul class="menu">
+
+            <li>
+              <a href="javascript:void(0)">My Site</a>
+            </li>
+          </ul>
+          <div class="search">
+            <input type="text">
+            <div class="material-icons">search</div>
+          </div>
         </div>
-        <div class="board-write-wrap">
-            <div class="board-write">
 
-                <div class="title">
-                    <dl>
-                        <dt>제목</dt>
-                        <dd><input type="text" id="title" placeholder="제목입력"></dd>
-                    </dl>
-                </div>
-                <div class="info">
-                    <dl>
-                        <dt>글쓴이</dt>
-                        <dd id="userid"></dd>
-                    </dl>
-                    
-                </div>
-                <div class="contents">
-                    <textarea id="content" placeholder="내용 입력"></textarea>
-                </div>
-            </div>
 
-            <div class="btn">
-                <button class="on" id="modifybtn">수정</button>
-                <a onclick="history.go(-1)">취소</a>
-
-            </div>
-        </div>
+      </div>
+    </header>
+    <div class="board-title">
+      <strong><a href="./index.html">공지사항</a></strong>
+      <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
     </div>
+    <div class="board-write-wrap">
+      <div class="board-write">
+
+        <div class="title">
+          <dl>
+            <dt>제목</dt>
+            <dd><input type="text" id="title" placeholder="제목입력"></dd>
+          </dl>
+        </div>
+        <div class="info">
+          <dl>
+            <dt>글쓴이</dt>
+            <dd id="userid"></dd>
+          </dl>
+
+        </div>
+        <div class="contents">
+          <textarea id="content" placeholder="내용 입력"></textarea>
+        </div>
+      </div>
+
+      <div class="btn">
+        <button class="on" id="modifybtn">수정</button>
+        <a onclick="history.go(-1)">취소</a>
+
+      </div>
+    </div>
+  </div>
 
 </body>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBdHq8r4EMKfC1d3kug8xOnv14Ui-TA_Hg",
@@ -103,7 +133,7 @@
     })
 
 </script>
-    
+
 
 
 </html>
