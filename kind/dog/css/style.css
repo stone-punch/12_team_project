@@ -66,13 +66,13 @@ header .top .menu {
 
 }
 
-header .top .menu .main-menu>li {
+.menu .main-menu>li {
   float: left;
   width: 180px;
 
 }
 
-header .top .menu .main-menu>li>a {
+.menu .main-menu>li>a {
   display: block;
   width: 180px;
   height: 40px;
@@ -83,12 +83,12 @@ header .top .menu .main-menu>li>a {
   color: #ffffff;
 }
 
-header .top .menu .main-menu>li>a:hover {
+.menu .main-menu>li>a:hover {
   background-color: #930930;
   color: #ffff00;
 }
 
-header .top .menu .main-menu>li .sub-menu {
+.menu .main-menu>li .sub-menu {
   float: left;
   display: none;
   width: 180px;
@@ -96,7 +96,7 @@ header .top .menu .main-menu>li .sub-menu {
 }
 
 
-header .top .menu .main-menu>li .sub-menu li a {
+.menu .main-menu>li .sub-menu li a {
   display: block;
   width: 180px;
   height: 40px;
@@ -107,7 +107,7 @@ header .top .menu .main-menu>li .sub-menu li a {
   color: #ffffff;
 }
 
-header .top .menu .main-menu>li .sub-menu li a:hover {
+.menu .main-menu>li .sub-menu li a:hover {
   background-color: #999999;
   color: #ffff00;
 }
@@ -126,6 +126,11 @@ header .top .menu .main-menu>li .sub-menu li a:hover {
   line-height: 100px;
   text-align: center;
   /* background-color: blue; */
+}
+
+.contents h2 {
+  width: 100%;
+  height: 100px;
 }
 
 .contents .con-menu {

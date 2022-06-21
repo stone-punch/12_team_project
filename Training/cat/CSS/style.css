@@ -1,0 +1,57 @@
+@import url(/kind/dog/css/style.css);
+@import url(/CSS/CSS_reset.css);
+
+ul,
+li {
+  list-style: none;
+}
+
+
+.main-menu {
+  width: 180px;
+  height: 600px;
+  margin: 10px;
+  position: absolute;
+  top: 100px;
+
+}
+
+.main-menu>li {
+  float: left;
+}
+
+.main-menu>li:hover>a {
+  background-color: #930;
+  color: #fff;
+}
+
+.main-menu>li>a {
+  display: block;
+  width: 180px;
+  height: 40px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+.main-menu>li .sub-menu {}
+
+.main-menu>li .sub-menu li {}
+
+.main-menu>li .sub-menu li a:hover {
+  background-color: #930;
+  color: #fff;
+}
+
+.main-menu>li .sub-menu li a {
+  display: none;
+  width: 180px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  /* font-weight: bold; */
+}
